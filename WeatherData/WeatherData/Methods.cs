@@ -62,11 +62,69 @@ namespace WeatherData
         }
         public static void Inside()
         {
+            foreach (int c in Enum.GetValues(typeof(InsideMenu)))
+            {
+                Console.WriteLine($"{c}: " + $"{Enum.GetName(typeof(InsideMenu), c).Replace('_', ' ')}");
+            }
 
+            InsideMenu insideMenu = (InsideMenu)99;
+            int number;
+            if (int.TryParse(Console.ReadKey(true).KeyChar.ToString(), out number))
+            {
+                insideMenu = (InsideMenu)number;
+                Console.Clear();
+            }
+            switch (insideMenu) 
+            {
+                case InsideMenu.Average_temperature_for_selected_date:
+
+                    break;
+                case InsideMenu.Hottest_to_coldest:
+
+                    break;
+                case InsideMenu.Driest_to_moistest:
+
+                    break;
+                case InsideMenu.Least_to_greatest_risk_of_mold: 
+                    
+                    break;
+            }
         }
         public static void Outside()
         {
+            foreach (int c in Enum.GetValues(typeof(OutsideMenu)))
+            {
+                Console.WriteLine($"{c}: " + $"{Enum.GetName(typeof(OutsideMenu), c).Replace('_', ' ')}");
+            }
 
+            OutsideMenu outsideMenu = (OutsideMenu)99;
+            int number;
+            if (int.TryParse(Console.ReadKey(true).KeyChar.ToString(), out number))
+            {
+                outsideMenu = (OutsideMenu)number;
+                Console.Clear();
+            }
+            switch(outsideMenu) 
+            {
+                case OutsideMenu.Average_temperature_and_humidity_per_day: 
+                    
+                    break;
+                case OutsideMenu.Hottest_to_Coldest:
+
+                    break;
+                case OutsideMenu.Driest_to_moistest:
+
+                    break;
+                case OutsideMenu.Least_to_greatest_risk_of_mold:
+
+                    break;
+                case OutsideMenu.Date_of_meteorological_Autumn: 
+                    
+                    break;
+                case OutsideMenu.Date_of_meteorological_winter:
+
+                    break;
+            }
         }
         public static void Pattern()
         {

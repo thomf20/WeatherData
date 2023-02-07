@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            Methods.CalculateMatches();
+            Methods.RunMe();
         }
     }
 }
