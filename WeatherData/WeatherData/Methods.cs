@@ -146,5 +146,17 @@ namespace WeatherData
             }
 
         }
+        public static void OutsideAvrageTempAndHumidity()
+        {
+            Console.WriteLine("Please enter a date you would like to see (yyyy-mm-dd)");
+            string UserInput = Console.ReadLine();
+
+            if (UserInput )
+            {
+                
+            }
+
+
+        }
     }
 }
