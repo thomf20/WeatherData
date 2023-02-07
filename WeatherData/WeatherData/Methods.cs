@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using System.IO;
 
 namespace WeatherData
 {
@@ -106,8 +107,8 @@ namespace WeatherData
             }
             switch(outsideMenu) 
             {
-                case OutsideMenu.Average_temperature_and_humidity_per_day: 
-                    
+                case OutsideMenu.Average_temperature_and_humidity_per_day:
+                    OutsideAvrageTempAndHumidity();
                     break;
                 case OutsideMenu.Hottest_to_Coldest:
 
@@ -148,15 +149,29 @@ namespace WeatherData
         }
         public static void OutsideAvrageTempAndHumidity()
         {
+            string path = "../../../../WeatherData/Files/TextFile1.txt";
             Console.WriteLine("Please enter a date you would like to see (yyyy-mm-dd)");
-            string UserInput = Console.ReadLine();
+            string userInput = Console.ReadLine();
 
-            if (UserInput )
+            Regex regex = new Regex("^" + userInput + ".*");
+
+            string[] lines = File.ReadAllLines(path);
+
+            bool dateFound = false;
+
+            foreach(string line in lines)
             {
-                
+                if (regex.IsMatch(line))
+                {
+                    Console.WriteLine(line);
+                    dateFound = true;
+                }
             }
-
-
+            if (!dateFound)
+            {
+                Console.WriteLine("No data found for the specified date.");
+                OutsideAvrageTempAndHumidity();
+            }
         }
     }
 }
