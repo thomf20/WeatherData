@@ -4,7 +4,8 @@
     {
         static void Main(string[] args)
         {
-            Methods.RunMe();
+            //Methods.RunMe();
+            Methods.Testing();
         }
     }
 }

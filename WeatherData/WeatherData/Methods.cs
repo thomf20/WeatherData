@@ -180,5 +180,73 @@ namespace WeatherData
                 OutsideAvrageTempAndHumidity();
             }
         }
+        public static void Testing()
+        {
+            //string path = "../../../../WeatherData/Files/TextFile1.txt";
+            //Console.WriteLine("Please enter a date you would like to see (yyyy-mm-dd)");
+            //string userInput = Console.ReadLine();
+
+            //Regex regex = new Regex(@"^" + userInput + ".*(?<=Ute,).*");
+
+            //string[] lines = File.ReadAllLines(path);
+            //bool dateFound = false;
+
+            //string[] splitArray = lines.ToString().Split(',');
+
+            //Console.WriteLine("Test: " + splitArray[0]);
+
+
+            //foreach (string line in lines)
+            //{
+            //    if (regex.IsMatch(line))
+            //    {
+            //        Console.WriteLine(line);
+            //        dateFound = true;
+
+            //    }
+            //}
+            //if (!dateFound)
+            //{
+            //    Console.WriteLine("No data found for the specified date.");
+            //    OutsideAvrageTempAndHumidity();
+            //}
+
+
+
+            // -------------------------------------------------
+        //    string path = "../../../../WeatherData/Files/TextFile1.txt";
+        //    Console.WriteLine("Please enter a date you would like to see (yyyy-mm-dd)");
+        //    string userInput = Console.ReadLine();
+
+        //    Regex regex = new Regex(@"^" + userInput + ".*(?<=Ute,).*");
+
+        //    string[] lines = File.ReadAllLines(path);
+        //    bool dateFound = false;
+
+        //    double Temp = 0;
+        //    double Moist = 0; 
+
+        //    foreach (string line in lines)
+        //    {
+        //        if (regex.IsMatch(line))
+        //        {
+        //            string[] splitArray = line.Split(',');
+        //            Console.WriteLine("Temp: " + splitArray[2]);
+        //            Console.WriteLine("Moist: " + splitArray[3]);
+
+        //            //Temp = Temp + splitArray[2];
+
+
+        //            dateFound = true;
+        //            break;
+        //        }
+        //    }
+
+        //    if (!dateFound)
+        //    {
+        //        Console.WriteLine("Date not found.");
+        //        Testing();
+        //    }
+        }
     }
 }
