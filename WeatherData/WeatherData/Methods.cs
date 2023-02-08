@@ -153,7 +153,7 @@ namespace WeatherData
             Console.WriteLine("Please enter a date you would like to see (yyyy-mm-dd)");
             string userInput = Console.ReadLine();
 
-            Regex regex = new Regex("^" + userInput + ".*");
+            Regex regex = new Regex(@"\d{2}$");
 
             string[] lines = File.ReadAllLines(path);
 
