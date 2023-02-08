@@ -6,14 +6,12 @@ using System.Threading.Tasks;
 
 namespace WeatherData
 {
-    internal class WeatherData
+    public class WeatherData
     {
         public int Datetime { get; set; }
         public int Time { get; set; }
-        public int Location { get; set; }
+        public string Location { get; set; }
         public double Temprature { get; set; }
         public int Moist { get; set; }
-
-
     }
 }

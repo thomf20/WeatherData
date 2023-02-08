@@ -248,5 +248,73 @@ namespace WeatherData
         //        Testing();
         //    }
         }
+        public static void NewTesting()
+        {
+            //List<WeatherData> WeatherDataList = new List<WeatherData>();
+
+            //string path = "../../../../WeatherData/Files/TextFile1.txt";
+            //Console.WriteLine("Please enter a date you would like to see (yyyy-mm-dd)");
+            //string userInput = Console.ReadLine();
+
+            //Regex regex = new Regex(@"^" + userInput + ".*(?<=Ute,).*");
+
+            //string[] lines = File.ReadAllLines(path);
+            //bool dateFound = false;
+
+            //foreach (string line in lines)
+            //{
+            //    if (regex.IsMatch(line))
+            //    {
+            //        Console.WriteLine(line);
+            //        WeatherDataList.Add(line);
+            //        dateFound = true;
+            //    }
+            //}
+            //if (!dateFound)
+            //{
+            //    Console.WriteLine("No data found for the specified date.");
+            //    OutsideAvrageTempAndHumidity();
+            //}
+
+
+            List<WeatherData> WeatherDataList = new List<WeatherData>();
+
+            string path = "../../../../WeatherData/Files/TextFile1.txt";
+            Console.WriteLine("Please enter a date you would like to see (yyyy-mm-dd)");
+            string userInput = Console.ReadLine();
+
+            //Regex regex = new Regex(@"^" + userInput + ".*(?<=Ute,).*");
+
+            string[] lines = File.ReadAllLines(path);
+            bool dateFound = false;
+
+            foreach (string line in lines)
+            {
+                if (regex.IsMatch(line))
+                {
+                    Console.WriteLine(line);
+                    string[] splitArray = new string[4];
+                    splitArray = line.Split(',', ' ');
+                    WeatherData weatherData = new WeatherData
+                    {
+                        Datetime = int.Parse(splitArray[0]),
+                        Time = int.Parse(splitArray[1]),
+                        Location = splitArray[2],
+                        Temprature = double.Parse(splitArray[3]),
+                        Moist = int.Parse(splitArray[4])
+                    };
+                    WeatherDataList.Add(weatherData);
+                    dateFound = true;
+                }
+            }
+
+            if (!dateFound)
+            {
+                Console.WriteLine("No data found for the specified date.");
+                OutsideAvrageTempAndHumidity();
+            }
+
+        }
     }
+    
 }
