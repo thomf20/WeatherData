@@ -132,6 +132,10 @@ namespace WeatherData
             //  ([12]\d{ 3}-(0[6 - 9] | 1[0 - 2]) - (0[1 - 9] |[12]\d | 3[01]))     -TAR BORT MAJ
             // (2016-05|2017-01)    -matcher det vi inte villmatcha
             //      ^(2017-(0[2-9]|[2-9][0-9])|2016-(0[0-4]|0[6-9]|[1-9][0-9])).* - matchar det vi vill.
+            // @"^" + userInput + ".*(?<=Ute,).*"
+            // @"^" + userInput + ".*(?<=Inne,).*"
+            // @"^" + userInput + ".*"
+            // @"(\d+\.\d+),(\d+)" - matchar temp samt luftfuktighet.
         }
         public static void CalculateMatches()
         {
@@ -153,18 +157,21 @@ namespace WeatherData
             Console.WriteLine("Please enter a date you would like to see (yyyy-mm-dd)");
             string userInput = Console.ReadLine();
 
-            Regex regex = new Regex(@"^" + userInput + ".*");
-
+            Regex regex = new Regex(@"^" + userInput + ".*(?<=Ute,).*");
+            
             string[] lines = File.ReadAllLines(path);
-
             bool dateFound = false;
 
-            foreach(string line in lines)
+            string[] splitArray = lines.ToString().Split(',');
+            Console.WriteLine(splitArray[0]);
+
+            foreach (string line in lines)
             {
                 if (regex.IsMatch(line))
                 {
                     Console.WriteLine(line);
                     dateFound = true;
+
                 }
             }
             if (!dateFound)
