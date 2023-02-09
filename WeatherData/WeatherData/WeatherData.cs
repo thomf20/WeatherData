@@ -8,8 +8,8 @@ namespace WeatherData
 {
     public class WeatherData
     {
-        public int Datetime { get; set; }
-        public int Time { get; set; }
+        public string Datetime { get; set; }
+        public string Time { get; set; }
         public string Location { get; set; }
         public double Temprature { get; set; }
         public int Moist { get; set; }

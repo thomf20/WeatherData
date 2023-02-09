@@ -277,43 +277,91 @@ namespace WeatherData
             //}
 
 
+            //List<WeatherData> WeatherDataList = new List<WeatherData>();
+
+            //string path = "../../../../WeatherData/Files/TextFile1.txt";
+            //Console.WriteLine("Please enter a date you would like to see (yyyy-mm-dd)");
+            //string userInput = Console.ReadLine();
+
+            //Regex regex = new Regex(@"^" + userInput + "*");
+
+            //string[] lines = File.ReadAllLines(path);
+            //bool dateFound = false;
+
+            //foreach (string line in lines)
+            //{
+            //    if (regex.IsMatch(line))
+            //    {
+            //        Console.WriteLine(line);
+            //        string[] splitArray = new string[4];
+            //        splitArray = line.Split(',', ' ');
+            //        WeatherData weatherData = new WeatherData
+            //        {
+            //            Datetime = int.Parse(splitArray[0]),
+            //            Time = int.Parse(splitArray[1]),
+            //            Location = splitArray[2],
+            //            Temprature = double.Parse(splitArray[3]),
+            //            Moist = int.Parse(splitArray[4])
+            //        };
+            //        WeatherDataList.Add(weatherData);
+            //        dateFound = true;
+            //    }
+            //}
+
+            //if (!dateFound)
+            //{
+            //    Console.WriteLine("No data found for the specified date.");
+            //    OutsideAvrageTempAndHumidity();
+            //}
+
             List<WeatherData> WeatherDataList = new List<WeatherData>();
 
+
+
+        }
+        public static void Testing123()
+        {
+
             string path = "../../../../WeatherData/Files/TextFile1.txt";
-            Console.WriteLine("Please enter a date you would like to see (yyyy-mm-dd)");
-            string userInput = Console.ReadLine();
+            List<WeatherData> WeatherDataList = new List<WeatherData>();
 
-            //Regex regex = new Regex(@"^" + userInput + ".*(?<=Ute,).*");
-
-            string[] lines = File.ReadAllLines(path);
-            bool dateFound = false;
-
-            foreach (string line in lines)
+            using (StreamReader sr = new StreamReader(path))
             {
-                if (regex.IsMatch(line))
+                List<string> DataParts = new List<string>();
+                
+
+                DataParts = File.ReadAllLines(path).ToList();
+                string splitString = "";
+
+                foreach (string data in DataParts)
                 {
-                    Console.WriteLine(line);
-                    string[] splitArray = new string[4];
-                    splitArray = line.Split(',', ' ');
-                    WeatherData weatherData = new WeatherData
+                    string[] parts = data.Split(' ',',');
+
+                    foreach (string part in parts)
                     {
-                        Datetime = int.Parse(splitArray[0]),
-                        Time = int.Parse(splitArray[1]),
-                        Location = splitArray[2],
-                        Temprature = double.Parse(splitArray[3]),
-                        Moist = int.Parse(splitArray[4])
-                    };
-                    WeatherDataList.Add(weatherData);
-                    dateFound = true;
+                       DataParts.Add(part);
+                    }
+
                 }
-            }
+                foreach (string part in DataParts)
+                {
+                    WeatherData weatherData = new WeatherData()
+                    {
+                        Datetime = Convert.ToString(part[0]),
+                        Time = Convert.ToString(part[1]),
+                        Location = Convert.ToString(part[2]),
+                        Temprature = Convert.ToDouble(part[3]),
+                        Moist = Convert.ToInt32(part[4]),
+                    };
+                }
+                //foreach (string line in lines)
+                //{
+                //    splitString = line.Replace(",", " ");
+                //    //Console.WriteLine(splitString);
 
-            if (!dateFound)
-            {
-                Console.WriteLine("No data found for the specified date.");
-                OutsideAvrageTempAndHumidity();
-            }
 
+                //}
+            }
         }
     }
     

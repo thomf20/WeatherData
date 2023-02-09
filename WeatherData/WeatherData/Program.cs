@@ -5,7 +5,7 @@
         static void Main(string[] args)
         {
             //Methods.RunMe();
-            Methods.NewTesting();
+            Methods.Testing123();
         }
     }
 }
