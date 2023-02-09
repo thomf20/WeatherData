@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using System.IO;
+using System.Diagnostics.Metrics;
 
 namespace WeatherData
 {
@@ -321,47 +322,120 @@ namespace WeatherData
         }
         public static void Testing123()
         {
-
             string path = "../../../../WeatherData/Files/TextFile1.txt";
-            List<WeatherData> WeatherDataList = new List<WeatherData>();
+
+            //string dateTime;
+            //string time;
+            //string location;
+            //double temp;
+            //int moist;
 
             using (StreamReader sr = new StreamReader(path))
             {
-                List<string> DataParts = new List<string>();
-                
+                List<string> dataList = new List<string>();
+                dataList = File.ReadAllLines(path).ToList();
 
-                DataParts = File.ReadAllLines(path).ToList();
-                string splitString = "";
+                List<WeatherData> weatherDataList = new List<WeatherData>();
 
-                foreach (string data in DataParts)
+                string[] parts;
+
+                foreach (string data in dataList)
                 {
-                    string[] parts = data.Split(' ',',');
+                     parts = data.Split(' ', ',');
 
-                    foreach (string part in parts)
+                    foreach(string line in parts)
                     {
-                       DataParts.Add(part);
+                        Console.WriteLine(line);
                     }
 
-                }
-                foreach (string part in DataParts)
-                {
-                    WeatherData weatherData = new WeatherData()
-                    {
-                        Datetime = Convert.ToString(part[0]),
-                        Time = Convert.ToString(part[1]),
-                        Location = Convert.ToString(part[2]),
-                        Temprature = Convert.ToDouble(part[3]),
-                        Moist = Convert.ToInt32(part[4]),
-                    };
-                }
-                //foreach (string line in lines)
-                //{
-                //    splitString = line.Replace(",", " ");
-                //    //Console.WriteLine(splitString);
+                    //dateTime = parts[0];
+                    //time = parts[1];
+                    //location = parts[2];
+                    //temp = Convert.ToDouble(parts[3]);
+                    //moist = Convert.ToInt32(parts[4]);
+
+                    //WeatherData weatherData = new WeatherData
+
+                    //{
+                    //    Datetime = dateTime,
+                    //    Time = time,
+                    //    Location = location,
+                    //    Temprature = temp,
+                    //    Moist = moist
+                    //};
+                    //weatherDataList.Add(weatherData);
+                    //foreach(var w in weatherDataList)
+                    //{
+                    //    Console.WriteLine(w.Temprature);
+                    //}
 
 
-                //}
+
+
+
+
+
+                    //try
+                    //{
+                    //    WeatherData weatherData = new WeatherData
+                    //    {
+                    //        Datetime = dateTime,
+                    //        Time = time,
+                    //        Location = location,
+                    //        Temprature = temp,
+                    //        Moist = moist,
+                    //    };
+                    //}
+                    //catch (FormatException e)
+                    //{
+                    //    Console.WriteLine(e);
+                    //}
+
+
+                }
             }
+                
+
+
+
+            //string path = "../../../../WeatherData/Files/TextFile1.txt";
+            //List<WeatherData> WeatherDataList = new List<WeatherData>();
+
+            //using (StreamReader sr = new StreamReader(path))
+            //{
+            //    List<string> DataParts = new List<string>();
+
+            //    DataParts = File.ReadAllLines(path).ToList();
+
+            //    foreach (string data in DataParts)
+            //    {
+            //        string[] parts = data.Split(' ',',');
+
+            //        foreach (string part in parts)
+            //        {
+            //           DataParts.Add(part);
+            //        }
+
+            //    }
+            //for(int i = 0; i < DataParts.Count(); i++)
+            //{
+            //    WeatherData weatherData = new WeatherData()
+            //    {
+            //        Datetime = Convert.ToString(DataParts[0]),
+            //        Time = Convert.ToString(DataParts[1]),
+            //        Location = Convert.ToString(DataParts[2]),
+            //        Temprature = Convert.ToDouble(DataParts[3]),
+            //        Moist = Convert.ToInt32(DataParts[4]),
+            //    };
+            //}
+            //foreach (string line in lines)
+            //{
+            //    splitString = line.Replace(",", " ");
+            //    //Console.WriteLine(splitString);
+
+
+            //}
+            //}
         }
     }
     
