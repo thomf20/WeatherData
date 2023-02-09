@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using System.IO;
 using System.Diagnostics.Metrics;
-
+using System.Globalization;
 namespace WeatherData
 {
     internal class Methods
@@ -343,31 +343,36 @@ namespace WeatherData
                 {
                      parts = data.Split(' ', ',');
 
-                    foreach(string line in parts)
-                    {
-                        Console.WriteLine(line);
-                    }
-
-                    //dateTime = parts[0];
-                    //time = parts[1];
-                    //location = parts[2];
-                    //temp = Convert.ToDouble(parts[3]);
-                    //moist = Convert.ToInt32(parts[4]);
-
-                    //WeatherData weatherData = new WeatherData
-
+                    //foreach(string line in parts)
                     //{
-                    //    Datetime = dateTime,
-                    //    Time = time,
-                    //    Location = location,
-                    //    Temprature = temp,
-                    //    Moist = moist
-                    //};
-                    //weatherDataList.Add(weatherData);
-                    //foreach(var w in weatherDataList)
-                    //{
-                    //    Console.WriteLine(w.Temprature);
+                    //    Console.WriteLine(line);
                     //}
+                    string dateTime;
+                    string time;
+                    string location;
+                    double temp;
+                    int moist;
+
+                    dateTime = parts[0];
+                    time = parts[1];
+                    location = parts[2];
+                    temp = Convert.ToDouble(parts[3]);
+                    moist = Convert.ToInt32(parts[4]);
+
+                    WeatherData weatherData = new WeatherData
+
+                    {
+                        Datetime = dateTime,
+                        Time = time,
+                        Location = location,
+                        Temprature = temp,
+                        Moist = moist
+                    };
+                    weatherDataList.Add(weatherData);
+                    foreach (var w in weatherDataList)
+                    {
+                        Console.WriteLine(w.Temprature);
+                    }
 
 
 
