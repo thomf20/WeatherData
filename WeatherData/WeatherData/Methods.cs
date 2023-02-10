@@ -7,13 +7,14 @@ using System.Text.RegularExpressions;
 using System.IO;
 using System.Diagnostics.Metrics;
 using System.Globalization;
+
 namespace WeatherData
 {
     internal class Methods
     {
         enum MainMenu
         {
-            Inside = 1, 
+            Inside = 1,
             Outside = 2
         }
         enum InsideMenu
@@ -25,7 +26,7 @@ namespace WeatherData
             Least_to_greatest_risk_of_mold
 
         }
-        enum OutsideMenu 
+        enum OutsideMenu
         {
             Average_temperature_and_humidity_per_day = 1,
             Hottest_to_Coldest,
@@ -50,7 +51,7 @@ namespace WeatherData
                 mainmenu = (MainMenu)number;
                 Console.Clear();
             }
-            switch (mainmenu) 
+            switch (mainmenu)
             {
                 case MainMenu.Inside:
                     Console.WriteLine("You are inside now");
@@ -76,7 +77,7 @@ namespace WeatherData
                 insideMenu = (InsideMenu)number;
                 Console.Clear();
             }
-            switch (insideMenu) 
+            switch (insideMenu)
             {
                 case InsideMenu.Average_temperature_for_selected_date:
 
@@ -87,8 +88,8 @@ namespace WeatherData
                 case InsideMenu.Driest_to_moistest:
 
                     break;
-                case InsideMenu.Least_to_greatest_risk_of_mold: 
-                    
+                case InsideMenu.Least_to_greatest_risk_of_mold:
+
                     break;
             }
         }
@@ -106,7 +107,7 @@ namespace WeatherData
                 outsideMenu = (OutsideMenu)number;
                 Console.Clear();
             }
-            switch(outsideMenu) 
+            switch (outsideMenu)
             {
                 case OutsideMenu.Average_temperature_and_humidity_per_day:
                     OutsideAvrageTempAndHumidity();
@@ -120,8 +121,8 @@ namespace WeatherData
                 case OutsideMenu.Least_to_greatest_risk_of_mold:
 
                     break;
-                case OutsideMenu.Date_of_meteorological_Autumn: 
-                    
+                case OutsideMenu.Date_of_meteorological_Autumn:
+
                     break;
                 case OutsideMenu.Date_of_meteorological_winter:
 
@@ -154,48 +155,32 @@ namespace WeatherData
         }
         public static void OutsideAvrageTempAndHumidity()
         {
-            string path = "../../../../WeatherData/Files/TextFile1.txt";
+
             Console.WriteLine("Please enter a date you would like to see (yyyy-mm-dd)");
             string userInput = Console.ReadLine();
 
             Regex regex = new Regex(@"^" + userInput + ".*(?<=Ute,).*");
-            
-            string[] lines = File.ReadAllLines(path);
-            bool dateFound = false;
 
-            string[] splitArray = lines.ToString().Split(',');
-            Console.WriteLine(splitArray[0]);
+            CreateCorrectData(userInput);
 
-            foreach (string line in lines)
-            {
-                if (regex.IsMatch(line))
-                {
-                    Console.WriteLine(line);
-                    dateFound = true;
 
-                }
-            }
-            if (!dateFound)
-            {
-                Console.WriteLine("No data found for the specified date.");
-                OutsideAvrageTempAndHumidity();
-            }
-        }
-        public static void Testing()
-        {
+
+
+
+
+
+
+
+
+
             //string path = "../../../../WeatherData/Files/TextFile1.txt";
-            //Console.WriteLine("Please enter a date you would like to see (yyyy-mm-dd)");
-            //string userInput = Console.ReadLine();
-
             //Regex regex = new Regex(@"^" + userInput + ".*(?<=Ute,).*");
 
             //string[] lines = File.ReadAllLines(path);
             //bool dateFound = false;
 
             //string[] splitArray = lines.ToString().Split(',');
-
-            //Console.WriteLine("Test: " + splitArray[0]);
-
+            //Console.WriteLine(splitArray[0]);
 
             //foreach (string line in lines)
             //{
@@ -211,142 +196,25 @@ namespace WeatherData
             //    Console.WriteLine("No data found for the specified date.");
             //    OutsideAvrageTempAndHumidity();
             //}
-
-
-
-            // -------------------------------------------------
-        //    string path = "../../../../WeatherData/Files/TextFile1.txt";
-        //    Console.WriteLine("Please enter a date you would like to see (yyyy-mm-dd)");
-        //    string userInput = Console.ReadLine();
-
-        //    Regex regex = new Regex(@"^" + userInput + ".*(?<=Ute,).*");
-
-        //    string[] lines = File.ReadAllLines(path);
-        //    bool dateFound = false;
-
-        //    double Temp = 0;
-        //    double Moist = 0; 
-
-        //    foreach (string line in lines)
-        //    {
-        //        if (regex.IsMatch(line))
-        //        {
-        //            string[] splitArray = line.Split(',');
-        //            Console.WriteLine("Temp: " + splitArray[2]);
-        //            Console.WriteLine("Moist: " + splitArray[3]);
-
-        //            //Temp = Temp + splitArray[2];
-
-
-        //            dateFound = true;
-        //            break;
-        //        }
-        //    }
-
-        //    if (!dateFound)
-        //    {
-        //        Console.WriteLine("Date not found.");
-        //        Testing();
-        //    }
         }
-        public static void NewTesting()
-        {
-            //List<WeatherData> WeatherDataList = new List<WeatherData>();
-
-            //string path = "../../../../WeatherData/Files/TextFile1.txt";
-            //Console.WriteLine("Please enter a date you would like to see (yyyy-mm-dd)");
-            //string userInput = Console.ReadLine();
-
-            //Regex regex = new Regex(@"^" + userInput + ".*(?<=Ute,).*");
-
-            //string[] lines = File.ReadAllLines(path);
-            //bool dateFound = false;
-
-            //foreach (string line in lines)
-            //{
-            //    if (regex.IsMatch(line))
-            //    {
-            //        Console.WriteLine(line);
-            //        WeatherDataList.Add(line);
-            //        dateFound = true;
-            //    }
-            //}
-            //if (!dateFound)
-            //{
-            //    Console.WriteLine("No data found for the specified date.");
-            //    OutsideAvrageTempAndHumidity();
-            //}
-
-
-            //List<WeatherData> WeatherDataList = new List<WeatherData>();
-
-            //string path = "../../../../WeatherData/Files/TextFile1.txt";
-            //Console.WriteLine("Please enter a date you would like to see (yyyy-mm-dd)");
-            //string userInput = Console.ReadLine();
-
-            //Regex regex = new Regex(@"^" + userInput + "*");
-
-            //string[] lines = File.ReadAllLines(path);
-            //bool dateFound = false;
-
-            //foreach (string line in lines)
-            //{
-            //    if (regex.IsMatch(line))
-            //    {
-            //        Console.WriteLine(line);
-            //        string[] splitArray = new string[4];
-            //        splitArray = line.Split(',', ' ');
-            //        WeatherData weatherData = new WeatherData
-            //        {
-            //            Datetime = int.Parse(splitArray[0]),
-            //            Time = int.Parse(splitArray[1]),
-            //            Location = splitArray[2],
-            //            Temprature = double.Parse(splitArray[3]),
-            //            Moist = int.Parse(splitArray[4])
-            //        };
-            //        WeatherDataList.Add(weatherData);
-            //        dateFound = true;
-            //    }
-            //}
-
-            //if (!dateFound)
-            //{
-            //    Console.WriteLine("No data found for the specified date.");
-            //    OutsideAvrageTempAndHumidity();
-            //}
-
-            List<WeatherData> WeatherDataList = new List<WeatherData>();
-
-
-
-        }
-        public static void Testing123()
+        public static List<WeatherData> CreateCorrectData(string userinput)
         {
             string path = "../../../../WeatherData/Files/TextFile1.txt";
-
-            //string dateTime;
-            //string time;
-            //string location;
-            //double temp;
-            //int moist;
+            List<WeatherData> weatherDataList = new List<WeatherData>();
 
             using (StreamReader sr = new StreamReader(path))
             {
                 List<string> dataList = new List<string>();
                 dataList = File.ReadAllLines(path).ToList();
 
-                List<WeatherData> weatherDataList = new List<WeatherData>();
+                
 
                 string[] parts;
 
                 foreach (string data in dataList)
                 {
-                     parts = data.Split(' ', ',');
+                    parts = data.Split(' ', ',');
 
-                    //foreach(string line in parts)
-                    //{
-                    //    Console.WriteLine(line);
-                    //}
                     string dateTime;
                     string time;
                     string location;
@@ -356,11 +224,10 @@ namespace WeatherData
                     dateTime = parts[0];
                     time = parts[1];
                     location = parts[2];
-                    temp = Convert.ToDouble(parts[3]);
+                    temp = Convert.ToDouble(parts[3].Replace('.', ','));
                     moist = Convert.ToInt32(parts[4]);
 
                     WeatherData weatherData = new WeatherData
-
                     {
                         Datetime = dateTime,
                         Time = time,
@@ -369,79 +236,10 @@ namespace WeatherData
                         Moist = moist
                     };
                     weatherDataList.Add(weatherData);
-                    foreach (var w in weatherDataList)
-                    {
-                        Console.WriteLine(w.Temprature);
-                    }
-
-
-
-
-
-
-
-                    //try
-                    //{
-                    //    WeatherData weatherData = new WeatherData
-                    //    {
-                    //        Datetime = dateTime,
-                    //        Time = time,
-                    //        Location = location,
-                    //        Temprature = temp,
-                    //        Moist = moist,
-                    //    };
-                    //}
-                    //catch (FormatException e)
-                    //{
-                    //    Console.WriteLine(e);
-                    //}
-
 
                 }
             }
-                
-
-
-
-            //string path = "../../../../WeatherData/Files/TextFile1.txt";
-            //List<WeatherData> WeatherDataList = new List<WeatherData>();
-
-            //using (StreamReader sr = new StreamReader(path))
-            //{
-            //    List<string> DataParts = new List<string>();
-
-            //    DataParts = File.ReadAllLines(path).ToList();
-
-            //    foreach (string data in DataParts)
-            //    {
-            //        string[] parts = data.Split(' ',',');
-
-            //        foreach (string part in parts)
-            //        {
-            //           DataParts.Add(part);
-            //        }
-
-            //    }
-            //for(int i = 0; i < DataParts.Count(); i++)
-            //{
-            //    WeatherData weatherData = new WeatherData()
-            //    {
-            //        Datetime = Convert.ToString(DataParts[0]),
-            //        Time = Convert.ToString(DataParts[1]),
-            //        Location = Convert.ToString(DataParts[2]),
-            //        Temprature = Convert.ToDouble(DataParts[3]),
-            //        Moist = Convert.ToInt32(DataParts[4]),
-            //    };
-            //}
-            //foreach (string line in lines)
-            //{
-            //    splitString = line.Replace(",", " ");
-            //    //Console.WriteLine(splitString);
-
-
-            //}
-            //}
+            return weatherDataList;
         }
     }
-    
 }
