@@ -161,7 +161,47 @@ namespace WeatherData
 
             Regex regex = new Regex(@"^" + userInput + ".*(?<=Ute,).*");
 
-            CreateCorrectData(userInput);
+            string path = "../../../../WeatherData/Files/TextFile1.txt";
+            List<WeatherData> weatherDataList = new List<WeatherData>();
+
+            using (StreamReader sr = new StreamReader(path))
+            {
+                List<string> dataList = new List<string>();
+                dataList = File.ReadAllLines(path).ToList();
+
+                string[] parts;
+
+                foreach (string data in dataList)
+                {
+                    parts = data.Split(' ', ',');
+
+                    string dateTime = parts[0];
+                    string time = parts[1];
+                    string location = parts[2];
+                    double temp = Convert.ToDouble(parts[3].Replace('.', ','));
+                    int moist = Convert.ToInt32(parts[4]);
+
+                    WeatherData weatherData = new WeatherData
+                    {
+                        Datetime = dateTime,
+                        Time = time,
+                        Location = location,
+                        Temprature = temp,
+                        Moist = moist
+                    };
+                    weatherDataList.Add(weatherData);
+
+                    var hittaDatum = (from t in weatherDataList
+                                      where t.Datetime.Contains(userInput)
+                                      select t);
+                    foreach (var h in hittaDatum)
+                    {
+                        Console.WriteLine(h.Datetime + " - " + h.Temprature + " - " + h.Moist + " - " + h.Time);
+                    }
+                }
+            }
+
+
 
 
 
@@ -197,7 +237,7 @@ namespace WeatherData
             //    OutsideAvrageTempAndHumidity();
             //}
         }
-        public static List<WeatherData> CreateCorrectData(string userinput)
+        public static List<WeatherData> CreateCorrectData()
         {
             string path = "../../../../WeatherData/Files/TextFile1.txt";
             List<WeatherData> weatherDataList = new List<WeatherData>();
