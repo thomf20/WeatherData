@@ -527,19 +527,33 @@ namespace WeatherData
                     weatherDataList.Add(weatherData);
                 }
 
-                int count = 0;
-                var sortedList = (from t in weatherDataList
-                                  where t.Location.Contains("Ute")
-                                  group t by t.Datetime into g
-                                  orderby g.Average(a => a.Temprature) descending
-                                  select new { Date = g.Key, AverageTemp = Math.Round(g.Average(a => a.Temprature), 2) });
+                //var sortedList = (from t in weatherDataList
+                //                  where t.Location.Contains("Ute")
+                //                  group t by t.Datetime into g
+                //                  orderby g.Average(a => a.Temprature) descending
+                //                  select new { Date = g.Key, AverageTemp = Math.Round(g.Average(a => a.Temprature), 2) });
 
-                Console.WriteLine("Varmaste dagarna i ordning:");
+                //foreach(var s in sortedList)
+                //{
+                //    Console.WriteLine(s.Date +" - "+s.AverageTemp);
+                //}
 
-                foreach (var sorted in sortedList)
-                {
-                    Console.WriteLine(sorted.Date + " har en medeltemperatur på: " + sorted.AverageTemp + " grader celsius");
-                }
+
+                //int count = 0;
+                //foreach (var sorted in sortedList)
+                //{
+                //    if (sorted.AverageTemp <= 0)
+                //    {
+                //        count++;
+                //    }
+                //}
+
+                //Console.WriteLine("Antal dagar med temperaturer under eller lika med 0 grader: " + count);
+
+                //if (count < 5)
+                //{
+                //    Console.WriteLine("Det finns inte 5 dagar med temperaturer under eller lika med 0 grader.");
+                //}
             }
         }
         public static void DateWinter()
