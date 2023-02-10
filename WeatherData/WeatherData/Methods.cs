@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using System.IO;
 using System.Diagnostics.Metrics;
 using System.Globalization;
+using System.Security.Cryptography.X509Certificates;
 
 namespace WeatherData
 {
@@ -392,7 +393,7 @@ namespace WeatherData
 
                     break;
                 case OutsideMenu.Date_of_meteorological_Autumn:
-
+                    DateAutumn();
                     break;
                 case OutsideMenu.Date_of_meteorological_winter:
 
@@ -493,6 +494,61 @@ namespace WeatherData
                 }
             }
         }
+        public static void DateAutumn()
+        {
+            string path = "../../../../WeatherData/Files/TextFile1.txt";
+            List<WeatherData> weatherDataList = new List<WeatherData>();
 
+            using (StreamReader sr = new StreamReader(path))
+            {
+                List<string> dataList = new List<string>();
+                dataList = File.ReadAllLines(path).ToList();
+
+                string[] parts;
+
+                foreach (string data in dataList)
+                {
+                    parts = data.Split(' ', ',');
+
+                    string dateTime = parts[0];
+                    string time = parts[1];
+                    string location = parts[2];
+                    double temp = Convert.ToDouble(parts[3].Replace('.', ','));
+                    int moist = Convert.ToInt32(parts[4]);
+
+                    WeatherData weatherData = new WeatherData
+                    {
+                        Datetime = dateTime,
+                        Time = time,
+                        Location = location,
+                        Temprature = temp,
+                        Moist = moist
+                    };
+                    weatherDataList.Add(weatherData);
+                }
+
+                int count = 0;
+                var sortedList = (from t in weatherDataList
+                                  where t.Location.Contains("Ute")
+                                  group t by t.Datetime into g
+                                  orderby g.Average(a => a.Temprature) descending
+                                  select new { Date = g.Key, AverageTemp = Math.Round(g.Average(a => a.Temprature), 2) });
+
+                Console.WriteLine("Varmaste dagarna i ordning:");
+
+                foreach (var sorted in sortedList)
+                {
+                    Console.WriteLine(sorted.Date + " har en medeltemperatur på: " + sorted.AverageTemp + " grader celsius");
+                }
+            }
+        }
+        public static void DateWinter()
+        {
+
+        }
+        public static void RiskForMold()
+        {
+
+        }
     }
 }
