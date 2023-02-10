@@ -159,8 +159,6 @@ namespace WeatherData
             Console.WriteLine("Please enter a date you would like to see (yyyy-mm-dd)");
             string userInput = Console.ReadLine();
 
-            Regex regex = new Regex(@"^" + userInput + ".*(?<=Ute,).*");
-
             string path = "../../../../WeatherData/Files/TextFile1.txt";
             List<WeatherData> weatherDataList = new List<WeatherData>();
 
@@ -190,28 +188,23 @@ namespace WeatherData
                         Moist = moist
                     };
                     weatherDataList.Add(weatherData);
+                }
+                
+                var hittaDatum = (from t in weatherDataList
+                                  where t.Datetime.Contains(userInput) &&
+                                  t.Location.Contains("Ute")
+                                  select t);
 
-                    var hittaDatum = (from t in weatherDataList
-                                      where t.Datetime.Contains(userInput)
-                                      select t);
-                    foreach (var h in hittaDatum)
-                    {
-                        Console.WriteLine(h.Datetime + " - " + h.Temprature + " - " + h.Moist + " - " + h.Time);
-                    }
+                var tempAve = hittaDatum.Average(a=>a.Temprature);
+                var moistAve = hittaDatum.Average(a => a.Moist);
+
+                foreach (var h in hittaDatum)
+                {
+                    Console.WriteLine(h.Datetime + " är medeltemperaturen: " + Math.Round(tempAve, 2) + " grader celsius " + h.Location);
+                    Console.WriteLine("Luftfuktigheten är: " + Math.Round(moistAve));
+                    break;
                 }
             }
-
-
-
-
-
-
-
-
-
-
-
-
 
             //string path = "../../../../WeatherData/Files/TextFile1.txt";
             //Regex regex = new Regex(@"^" + userInput + ".*(?<=Ute,).*");
