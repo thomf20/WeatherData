@@ -80,7 +80,7 @@ namespace WeatherData
             switch (insideMenu)
             {
                 case InsideMenu.Average_temperature_for_selected_date:
-
+                    Methods.InsideTemp();
                     break;
                 case InsideMenu.Hottest_to_coldest:
 
@@ -201,7 +201,7 @@ namespace WeatherData
                 foreach (var h in hittaDatum)
                 {
                     Console.WriteLine(h.Datetime + " är medeltemperaturen: " + Math.Round(tempAve, 2) + " grader celsius " + h.Location);
-                    Console.WriteLine("Luftfuktigheten är: " + Math.Round(moistAve));
+                    Console.WriteLine("Medelluftfuktigheten är: " + Math.Round(moistAve));
                     break;
                 }
             }
@@ -273,6 +273,56 @@ namespace WeatherData
                 }
             }
             return weatherDataList;
+        }
+        public static void InsideTemp()
+        {
+            Console.WriteLine("Please enter a date you would like to see (yyyy-mm-dd)");
+            string userInput = Console.ReadLine();
+
+            string path = "../../../../WeatherData/Files/TextFile1.txt";
+            List<WeatherData> weatherDataList = new List<WeatherData>();
+
+            using (StreamReader sr = new StreamReader(path))
+            {
+                List<string> dataList = new List<string>();
+                dataList = File.ReadAllLines(path).ToList();
+
+                string[] parts;
+
+                foreach (string data in dataList)
+                {
+                    parts = data.Split(' ', ',');
+
+                    string dateTime = parts[0];
+                    string time = parts[1];
+                    string location = parts[2];
+                    double temp = Convert.ToDouble(parts[3].Replace('.', ','));
+                    int moist = Convert.ToInt32(parts[4]);
+
+                    WeatherData weatherData = new WeatherData
+                    {
+                        Datetime = dateTime,
+                        Time = time,
+                        Location = location,
+                        Temprature = temp,
+                        Moist = moist
+                    };
+                    weatherDataList.Add(weatherData);
+                }
+
+                var hittaDatum = (from t in weatherDataList
+                                  where t.Datetime.Contains(userInput) &&
+                                  t.Location.Contains("Inne")
+                                  select t);
+
+                var tempAve = hittaDatum.Average(a => a.Temprature);
+
+                foreach (var h in hittaDatum)
+                {
+                    Console.WriteLine(h.Datetime + " är medeltemperaturen: " + Math.Round(tempAve, 2) + " grader celsius " + h.Location);
+                    break;
+                }
+            }
         }
     }
 }
