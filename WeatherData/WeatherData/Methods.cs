@@ -260,6 +260,15 @@ namespace WeatherData
                 {
                     Console.WriteLine(sorted.Date + " har en medeltemperatur på: " + sorted.AverageTemp + " grader celsius");
                 }
+                //using (StreamWriter streamWriter = new StreamWriter("../../../../WeatherData/Files/newfile.txt", true))
+                //{
+                //    streamWriter.WriteLine("Medeltemperatur inomhus: ");
+                //    foreach (var s in sortedList)
+                //    {
+                //        streamWriter.WriteLine(s.Date + " har en medeltemperatur på " + s.AverageTemp + " grader celsius");
+                //    }
+                //    streamWriter.WriteLine("---------------------------------------------------------------------");
+                //}
             }
         }
         public static void DriestToMoistiestsInside()
@@ -306,6 +315,15 @@ namespace WeatherData
                 foreach (var sorted in sortedList)
                 {
                     Console.WriteLine(sorted.Date + " har en medelluftfuktighet " + sorted.AverageMoist + " %");
+                }
+                using (StreamWriter streamWriter = new StreamWriter("../../../../WeatherData/Files/newfile.txt", true))
+                {
+                    streamWriter.WriteLine("Medelluftfuktigheten inomhus: \n");
+                    foreach (var s in sortedList)
+                    {
+                        streamWriter.WriteLine(s.Date + " har en medelluftfuktighet " + s.AverageMoist + " %");
+                    }
+                    streamWriter.WriteLine("---------------------------------------------------------------------");
                 }
             }
         }
@@ -445,6 +463,15 @@ namespace WeatherData
                 {
                     Console.WriteLine(sorted.Date + " har en medeltemperatur på: " + sorted.AverageTemp + " grader celsius");
                 }
+                //using (StreamWriter writer = new StreamWriter("../../../../WeatherData/Files/newfile.txt"))
+                //{
+                //    writer.WriteLine("Medeltemperatur utomhus: \n");
+                //    foreach (var sorted in sortedList)
+                //    {
+                //        writer.WriteLine(sorted.Date + " har en medeltemperatur på: " + sorted.AverageTemp + " grader celsius");
+                //    }
+                //    writer.WriteLine("---------------------------------------------------------------------");
+                //}
             }
         }
         public static void DriestToMoistiestsOutside()
@@ -492,6 +519,15 @@ namespace WeatherData
                 {
                     Console.WriteLine(sorted.Date + " har en medelluftfuktighet " + sorted.AverageMoist + " %");
                 }
+                //using (StreamWriter streamWriter = new StreamWriter("../../../../WeatherData/Files/newfile.txt", true))
+                //{
+                //    streamWriter.WriteLine("Medelluftfuktigheten utomhus: \n");
+                //    foreach (var s in sortedList)
+                //    {
+                //        streamWriter.WriteLine(s.Date + " har en medelluftfuktighet " + s.AverageMoist + " %");
+                //    }
+                //    streamWriter.WriteLine("---------------------------------------------------------------------");
+                //}
             }
         }
         public static void DateAutumn()
