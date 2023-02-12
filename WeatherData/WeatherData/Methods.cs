@@ -396,7 +396,7 @@ namespace WeatherData
                     DateAutumn();
                     break;
                 case OutsideMenu.Date_of_meteorological_winter:
-
+                    DateWinter();
                     break;
             }
         }
@@ -527,38 +527,96 @@ namespace WeatherData
                     weatherDataList.Add(weatherData);
                 }
 
-                //var sortedList = (from t in weatherDataList
-                //                  where t.Location.Contains("Ute")
-                //                  group t by t.Datetime into g
-                //                  orderby g.Average(a => a.Temprature) descending
-                //                  select new { Date = g.Key, AverageTemp = Math.Round(g.Average(a => a.Temprature), 2) });
+                var sortedList = (from t in weatherDataList
+                                  where t.Location.Contains("Ute")
+                                  group t by t.Datetime into g
+                                  orderby g.Average(a => a.Temprature) descending
+                                  select new { Date = g.Key, AverageTemp = Math.Round(g.Average(a => a.Temprature), 2) });
 
-                //foreach(var s in sortedList)
-                //{
-                //    Console.WriteLine(s.Date +" - "+s.AverageTemp);
-                //}
+                foreach (var s in sortedList)
+                {
+                    Console.WriteLine(s.Date + " - " + s.AverageTemp);
+                }
 
 
-                //int count = 0;
-                //foreach (var sorted in sortedList)
-                //{
-                //    if (sorted.AverageTemp <= 0)
-                //    {
-                //        count++;
-                //    }
-                //}
+                int count = 0;
+                foreach (var sorted in sortedList)
+                {
+                    if (sorted.AverageTemp <= 10)
+                    {
+                        count++;
+                    }
+                }
 
-                //Console.WriteLine("Antal dagar med temperaturer under eller lika med 0 grader: " + count);
+                Console.WriteLine("Antal dagar med temperaturer under eller lika med 0 grader: " + count);
 
-                //if (count < 5)
-                //{
-                //    Console.WriteLine("Det finns inte 5 dagar med temperaturer under eller lika med 0 grader.");
-                //}
+                if (count < 5)
+                {
+                    Console.WriteLine("Det finns inte 5 dagar med temperaturer under eller lika med 0 grader.");
+                }
             }
         }
         public static void DateWinter()
         {
+            string path = "../../../../WeatherData/Files/TextFile1.txt";
+            List<WeatherData> weatherDataList = new List<WeatherData>();
 
+            using (StreamReader sr = new StreamReader(path))
+            {
+                List<string> dataList = new List<string>();
+                dataList = File.ReadAllLines(path).ToList();
+
+                string[] parts;
+
+                foreach (string data in dataList)
+                {
+                    parts = data.Split(' ', ',');
+
+                    string dateTime = parts[0];
+                    string time = parts[1];
+                    string location = parts[2];
+                    double temp = Convert.ToDouble(parts[3].Replace('.', ','));
+                    int moist = Convert.ToInt32(parts[4]);
+
+                    WeatherData weatherData = new WeatherData
+                    {
+                        Datetime = dateTime,
+                        Time = time,
+                        Location = location,
+                        Temprature = temp,
+                        Moist = moist
+                    };
+                    weatherDataList.Add(weatherData);
+                }
+
+                var sortedList = (from t in weatherDataList
+                                  where t.Location.Contains("Ute")
+                                  group t by t.Datetime into g
+                                  orderby g.Average(a => a.Temprature) descending
+                                  select new { Date = g.Key, AverageTemp = Math.Round(g.Average(a => a.Temprature), 2) });
+
+                foreach (var s in sortedList)
+                {
+                    Console.WriteLine(s.Date + " - " + s.AverageTemp);
+                }
+
+
+                int count = 0;
+                foreach (var sorted in sortedList)
+                {
+                    if (sorted.AverageTemp <= 0)
+                    {
+                        count++;
+                    }
+                }
+
+                Console.WriteLine("Antal dagar med temperaturer under eller lika med 0 grader: " + count);
+
+                if (count < 5)
+                {
+                    Console.WriteLine("Det finns inte 5 dagar med temperaturer under eller lika med 0 grader.");
+                }
+            }
         }
         public static void RiskForMold()
         {
