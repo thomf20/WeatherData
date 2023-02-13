@@ -24,7 +24,8 @@ namespace WeatherData
             Average_temperature_for_selected_date = 1,
             Hottest_to_coldest,
             Driest_to_moistest,
-            Least_to_greatest_risk_of_mold
+            Least_to_greatest_risk_of_mold,
+            Go_Back
 
         }
         enum OutsideMenu
@@ -34,11 +35,13 @@ namespace WeatherData
             Driest_to_moistest,
             Least_to_greatest_risk_of_mold,
             Date_of_meteorological_Autumn,
-            Date_of_meteorological_winter
+            Date_of_meteorological_winter,
+            Go_Back
         }
         //ADMIN CODE
         public static void RunMe()
         {
+            Console.Clear();
             Console.WriteLine("Welcome to Mohammed's & Thom's weatherdata app");
             Console.WriteLine("Please choose one of the options below");
             foreach (int c in Enum.GetValues(typeof(MainMenu)))
@@ -56,11 +59,9 @@ namespace WeatherData
             switch (mainmenu)
             {
                 case MainMenu.Inside:
-                    Console.WriteLine("You are inside now");
                     Inside();
                     break;
                 case MainMenu.Outside:
-                    Console.WriteLine("You are outside now");
                     Outside();
                     break;
             }
@@ -137,6 +138,7 @@ namespace WeatherData
         //INSIDE CODE
         public static void Inside()
         {
+            Console.Clear();
             foreach (int c in Enum.GetValues(typeof(InsideMenu)))
             {
                 Console.WriteLine($"{c}: " + $"{Enum.GetName(typeof(InsideMenu), c).Replace('_', ' ')}");
@@ -163,10 +165,20 @@ namespace WeatherData
                 case InsideMenu.Least_to_greatest_risk_of_mold:
 
                     break;
+                case InsideMenu.Go_Back:
+                    RunMe();
+                    break;
+            }
+            Console.WriteLine("Please enter X to go back to the menu");
+            string UserInput = Console.ReadLine();
+            if (UserInput == "X" || UserInput == "x")
+            {
+                RunMe();
             }
         }
         public static void InsideTemp()
         {
+            Console.Clear();
             Console.WriteLine("Please enter a date you would like to see (yyyy-mm-dd)");
             string userInput = Console.ReadLine();
 
@@ -213,10 +225,17 @@ namespace WeatherData
                     Console.WriteLine(h.Datetime + " är medeltemperaturen: " + Math.Round(tempAve, 2) + " grader celsius " + h.Location);
                     break;
                 }
+                Console.WriteLine("Please enter X to go back to the menu");
+                string UserInput = Console.ReadLine();
+                if (UserInput == "X" || UserInput == "x")
+                {
+                    Inside();
+                }
             }
         }
         public static void HottestToColdestInside()
         {
+            Console.Clear();
             string path = "../../../../WeatherData/Files/TextFile1.txt";
             List<WeatherData> weatherDataList = new List<WeatherData>();
 
@@ -260,6 +279,14 @@ namespace WeatherData
                 {
                     Console.WriteLine(sorted.Date + " har en medeltemperatur på: " + sorted.AverageTemp + " grader celsius");
                 }
+
+                Console.WriteLine("Please enter X to go back to the menu");
+                string UserInput = Console.ReadLine();
+                if (UserInput == "X" || UserInput == "x")
+                {
+                    Inside();
+                }
+
                 //using (StreamWriter streamWriter = new StreamWriter("../../../../WeatherData/Files/newfile.txt", true))
                 //{
                 //    streamWriter.WriteLine("Medeltemperatur inomhus: ");
@@ -273,6 +300,7 @@ namespace WeatherData
         }
         public static void DriestToMoistiestsInside()
         {
+            Console.Clear();
             string path = "../../../../WeatherData/Files/TextFile1.txt";
             List<WeatherData> weatherDataList = new List<WeatherData>();
 
@@ -325,11 +353,18 @@ namespace WeatherData
                     }
                     streamWriter.WriteLine("---------------------------------------------------------------------");
                 }
+
+                Console.WriteLine("Please enter X to go back to the menu");
+                string UserInput = Console.ReadLine();
+                if (UserInput == "X" || UserInput == "x")
+                {
+                    Inside();
+                }
             }
         }
         public static void OutsideAvrageTempAndHumidity()
         {
-
+            Console.Clear();
             Console.WriteLine("Please enter a date you would like to see (yyyy-mm-dd)");
             string userInput = Console.ReadLine();
 
@@ -384,6 +419,7 @@ namespace WeatherData
         //OUTSIDE CODE
         public static void Outside()
         {
+            Console.Clear();
             foreach (int c in Enum.GetValues(typeof(OutsideMenu)))
             {
                 Console.WriteLine($"{c}: " + $"{Enum.GetName(typeof(OutsideMenu), c).Replace('_', ' ')}");
@@ -416,10 +452,14 @@ namespace WeatherData
                 case OutsideMenu.Date_of_meteorological_winter:
                     DateWinter();
                     break;
+                case OutsideMenu.Go_Back:
+                    RunMe();
+                    break;
             }
         }
         public static void HottestToColdestOuside()
         {
+            Console.Clear();
             string path = "../../../../WeatherData/Files/TextFile1.txt";
             List<WeatherData> weatherDataList = new List<WeatherData>();
 
@@ -463,6 +503,12 @@ namespace WeatherData
                 {
                     Console.WriteLine(sorted.Date + " har en medeltemperatur på: " + sorted.AverageTemp + " grader celsius");
                 }
+                Console.WriteLine("Please enter X to go back to the menu");
+                string UserInput = Console.ReadLine();
+                if (UserInput == "X" || UserInput == "x")
+                {
+                    Outside();
+                }
                 //using (StreamWriter writer = new StreamWriter("../../../../WeatherData/Files/newfile.txt"))
                 //{
                 //    writer.WriteLine("Medeltemperatur utomhus: \n");
@@ -476,6 +522,7 @@ namespace WeatherData
         }
         public static void DriestToMoistiestsOutside()
         {
+            Console.Clear();
             string path = "../../../../WeatherData/Files/TextFile1.txt";
             List<WeatherData> weatherDataList = new List<WeatherData>();
 
@@ -518,6 +565,12 @@ namespace WeatherData
                 foreach (var sorted in sortedList)
                 {
                     Console.WriteLine(sorted.Date + " har en medelluftfuktighet " + sorted.AverageMoist + " %");
+                }
+                Console.WriteLine("Please enter X to go back to the menu");
+                string UserInput = Console.ReadLine();
+                if (UserInput == "X" || UserInput == "x")
+                {
+                    Outside();
                 }
                 //using (StreamWriter streamWriter = new StreamWriter("../../../../WeatherData/Files/newfile.txt", true))
                 //{
